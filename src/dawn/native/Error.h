@@ -167,7 +167,7 @@ std::string MakeIncreaseLimitMessage(std::string_view limitName, T adapterLimitV
 
 #define DAWN_CONCAT1(x, y) x##y
 #define DAWN_CONCAT2(x, y) DAWN_CONCAT1(x, y)
-#define DAWN_LOCAL_VAR(name) DAWN_CONCAT2(DAWN_CONCAT2(_localVar, __LINE__), name)
+#define DAWN_LOCAL_VAR(name) DAWN_CONCAT2(_DAWNlocalVar_, name)
 
 // Backtrace information adds a lot of binary size with the name of all the files and functions,
 // plus additional calls to AppendBacktrace. Only add the backtrace in Debug so as to save binary
