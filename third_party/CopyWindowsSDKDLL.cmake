@@ -44,8 +44,8 @@ function(DetectWindowsSDK out_sdk_path out_sdk_version)
         # so let's use that.
         # TODO(crbug.com/tint/2106): Get the Win10 SDK path and version ourselves until
         # dxc/cmake/modules/FindD3D12.cmake supports non-VS generators.
-        get_filename_component(sdk_path "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows Kits\\Installed Roots;KitsRoot10]" ABSOLUTE CACHE)
-        message(STATUS "WINDOWSSDKDIR environment variable is not defined, retrieving from registry: ${sdk_path}")
+        get_filename_component(sdk_path "[HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Microsoft SDKs\\Windows\\v10.0;InstallationFolder]" ABSOLUTE)
+        message(STATUS "WINDOWSSDKDIR environment variable is not defined, retrieved from registry: ${sdk_path}")
     endif()
 
     message(STATUS "Finding Windows SDK version")
