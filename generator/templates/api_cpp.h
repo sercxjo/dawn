@@ -660,7 +660,7 @@ using UncapturedErrorCallback = typename detail::CallbackTypeBase<std::tuple<con
             callbackInfo.userdata2 = nullptr;
         } else {
             auto* lambda = new L(std::move(callback));
-            callbackInfo.callback = [](
+            struct wrapper { static void wrap(
                 {%- for arg in CallbackType.arguments -%}
                     {{as_annotated_cType(arg)}}{{", "}}
                 {%- endfor -%}
@@ -678,7 +678,8 @@ using UncapturedErrorCallback = typename detail::CallbackTypeBase<std::tuple<con
                             {{convert_cType_to_cppType(arg.type, arg.annotation, as_varName(arg.name))}}
                         {%- endif -%}
                     {%- endfor -%});
-            };
+            }};
+            callbackInfo.callback = &wrapper::wrap;
             callbackInfo.userdata1 = reinterpret_cast<void*>(lambda);
             callbackInfo.userdata2 = nullptr;
         }
